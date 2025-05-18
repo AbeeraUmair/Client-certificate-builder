@@ -2,7 +2,14 @@
 
 # dependencies
 /node_modules
+
+*.json
+
+# credentials
 credentials/
+
+# logs
+logs/
 
 # next.js
 /.next/
