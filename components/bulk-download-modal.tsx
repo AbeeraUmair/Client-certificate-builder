@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Loader2, Download, FileDown, FileIcon as FilePdf } from "lucide-react"
+import { Loader2, Download, FileIcon as FilePdf } from "lucide-react"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
@@ -20,7 +20,7 @@ interface BulkDownloadModalProps {
   isOpen: boolean
   onClose: () => void
   certificates: Certificate[]
-  onDownload: (format: "pdf" | "png" | "zip", onProgress?: (progress: number) => void) => Promise<void>
+  onDownload: (format: "pdf" | "zip", onProgress?: (progress: number) => void) => Promise<void>
   maxDownloadLimit?: number
 }
 
@@ -31,7 +31,7 @@ export function BulkDownloadModal({
   onDownload,
   maxDownloadLimit = 100,
 }: BulkDownloadModalProps) {
-  const [format, setFormat] = useState<"pdf" | "png" | "zip">("pdf")
+  const [format, setFormat] = useState<"pdf" | "zip">("pdf")
   const [isDownloading, setIsDownloading] = useState(false)
   const [progress, setProgress] = useState(0)
   const certificateCount = certificates.length
@@ -81,7 +81,7 @@ export function BulkDownloadModal({
         ) : null}
 
         <div className="space-y-4 py-2">
-          <RadioGroup value={format} onValueChange={(value) => setFormat(value as "pdf" | "png" | "zip")}>
+          <RadioGroup value={format} onValueChange={(value) => setFormat(value as "pdf" | "zip")}>
             <div className="flex items-start space-x-2">
               <RadioGroupItem value="pdf" id="pdf" />
               <div className="grid gap-1.5 leading-none">
@@ -94,17 +94,6 @@ export function BulkDownloadModal({
             </div>
 
             <div className="flex items-start space-x-2">
-              <RadioGroupItem value="png" id="png" />
-              <div className="grid gap-1.5 leading-none">
-                <Label className="flex items-center gap-1.5" htmlFor="png">
-                  <FileDown className="h-4 w-4" />
-                  PNG Format
-                </Label>
-                <p className="text-sm text-muted-foreground">Download all certificates as individual PNG images.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-2">
               <RadioGroupItem value="zip" id="zip" />
               <div className="grid gap-1.5 leading-none">
                 <Label className="flex items-center gap-1.5" htmlFor="zip">
@@ -112,7 +101,7 @@ export function BulkDownloadModal({
                   ZIP Archive
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Download all certificates as PNG images in a ZIP archive.
+                  Download all certificates as image files in a ZIP archive.
                 </p>
               </div>
             </div>

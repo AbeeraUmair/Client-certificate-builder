@@ -165,7 +165,7 @@ export function CertificateBuilder() {
     }
   }
 
-  const handleBulkDownload = async (format: "pdf" | "png" | "zip", onProgress?: (progress: number) => void) => {
+  const handleBulkDownload = async (format: "pdf" | "zip", onProgress?: (progress: number) => void) => {
     try {
       if (certificates.length === 0) {
         throw new Error("No certificates to download")
@@ -197,36 +197,6 @@ export function CertificateBuilder() {
           // For ZIP, we'll generate a real ZIP file with progress updates
           blob = await generateCertificatesZIP(certificates, template)
           filename = "techforce-certificates.zip"
-          break
-
-        case "png":
-          // For PNG, we'll just download the first certificate as an example
-          if (!selectedCertificate) {
-            throw new Error("No certificate selected")
-          }
-
-          if (onProgress) {
-            onProgress(50) // Set initial progress
-          }
-
-          const canvas = document.createElement("canvas")
-          canvas.width = 1056
-          canvas.height = 816
-          document.body.appendChild(canvas)
-
-          try {
-            await renderCertificateToCanvas(canvas, selectedCertificate, template)
-            blob = await new Promise<Blob>((resolve) => {
-              canvas.toBlob((b) => resolve(b!), "image/png")
-            })
-            filename = `${selectedCertificate.name.replace(/\s+/g, "-")}-certificate.png`
-
-            if (onProgress) {
-              onProgress(90) // Almost done
-            }
-          } finally {
-            document.body.removeChild(canvas)
-          }
           break
 
         default:

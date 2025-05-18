@@ -15,7 +15,6 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Certificate Builder - Techforce Pakistan",
   description: "Generate professional certificates for Techforce Pakistan",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

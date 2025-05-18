@@ -26,5 +26,5 @@ export interface CertificateTemplate {
 export interface DownloadHistory {
   certificateId: string
   downloadDate: string
-  format: "pdf" | "png" | "zip"
+  format: "pdf" | "zip"
 }

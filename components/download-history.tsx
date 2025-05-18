@@ -5,7 +5,7 @@ import { getDownloadHistory } from "@/lib/download-tracker"
 import type { DownloadHistory } from "@/lib/types"
 import { format } from "date-fns"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { FileDown, FileIcon as FilePdf, Archive } from "lucide-react"
+import { FileIcon as FilePdf, Archive } from "lucide-react"
 
 export function DownloadHistoryComponent() {
   const [history, setHistory] = useState<DownloadHistory[]>([])
@@ -30,15 +30,13 @@ export function DownloadHistoryComponent() {
     return null
   }
 
-  const getFormatIcon = (format: "pdf" | "png" | "zip") => {
+  const getFormatIcon = (format: "pdf" | "zip") => {
     switch (format) {
       case "pdf":
         return <FilePdf className="h-4 w-4 text-red-500" />
       case "zip":
-        return <Archive className="h-4 w-4 text-yellow-500" />
-      case "png":
       default:
-        return <FileDown className="h-4 w-4 text-blue-500" />
+        return <Archive className="h-4 w-4 text-yellow-500" />
     }
   }
 

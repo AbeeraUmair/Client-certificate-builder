@@ -15,7 +15,7 @@ export function getDownloadHistory(): DownloadHistory[] {
 }
 
 // Function to add a download to history
-export function addDownloadToHistory(certificateId: string, format: "pdf" | "png" | "zip"): void {
+export function addDownloadToHistory(certificateId: string, format: "pdf" | "zip"): void {
   if (typeof window === "undefined") return
 
   const history = getDownloadHistory()
@@ -69,7 +69,7 @@ export function markCertificateAsDownloaded(certificateId: string): void {
   localStorage.setItem(CERTIFICATE_STATUS_KEY, JSON.stringify(statusMap))
 
   // Add to download history
-  addDownloadToHistory(certificateId, "png")
+  addDownloadToHistory(certificateId, "pdf")
 }
 
 // Function to get certificates that are ready for download
